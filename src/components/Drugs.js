@@ -16,8 +16,9 @@ class Drugs extends React.Component {
   setInventory(drugName, value) {
     const currentValue = this.props.gameReducer.inventory[drugName] || 0;
     const preventInventoryChange = (
-        value < 0
-        || (this.getTotal(drugName, value) > this.props.gameReducer.balance)
+      value < 0
+      || (this.getTotal(drugName, value) > this.props.gameReducer.balance)
+      || (this.getCapacity(drugName, value) > this.props.gameReducer.capacity)
     );
     if (preventInventoryChange) {
         return;
@@ -42,9 +43,16 @@ class Drugs extends React.Component {
         return subtotal + this.getItemSubtotal(drug);
     }, 0);
   }
+  getCapacity(drugOverride, valueOverride) {
+    return Object.keys(this.props.gameReducer.drugs).reduce((subtotal, drug) => {
+        if (drugOverride && drug == drugOverride) {
+            return subtotal + valueOverride;
+        }
+        return subtotal + (this.state.localInventory[drug] || 0);
+    }, 0);
+  }
   handleSubmit(e) {
     e.preventDefault();
-    console.log('action', buyDrugs);
     this.props.actions.buyDrugs(this.state.localInventory, this.getTotal())
   }
   drugList() {

@@ -10,13 +10,15 @@ import {
   DRUGS,
   VIEWS,
   MAX_DAYS,
+  START_BALANCE,
 } from './const';
 
 const initialState = {
   view: VIEWS.INTRO,
   day: 1,
-  balance: 1000,
+  balance: START_BALANCE,
   inventory: {},
+  capacity: 100,
   locations: LOCATIONS,
   drugs: setDrugPrices(),
   incident: setIncident(),

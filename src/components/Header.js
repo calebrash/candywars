@@ -6,8 +6,9 @@ class Header extends React.Component {
   render() {
     return (
       <div>
-        Day: {this.props.gameReducer.day}
-        Cash: {this.props.gameReducer.balance}
+        <span>Day: {this.props.gameReducer.day}</span>
+        <span>Cash: {this.props.gameReducer.balance}</span>
+        <span>Capacity: {this.props.gameReducer.capacity}</span>
       </div>
     );
   }

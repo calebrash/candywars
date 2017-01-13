@@ -1,3 +1,6 @@
+const MAX_DAYS = 5;
+const START_BALANCE = 1000;
+
 const VIEWS = {
     INTRO: 1,
     LOCATIONS: 2,
@@ -23,10 +26,12 @@ const DRUGS = {
   'Cocaine': { index: 100 },
 };
 
-const MAX_DAYS = 5;
+const INCIDENTS = {
+};
 
 export {
     MAX_DAYS,
+    START_BALANCE,
     VIEWS,
     LOCATIONS,
     DRUGS,
