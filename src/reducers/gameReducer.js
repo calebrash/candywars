@@ -25,7 +25,8 @@ const initialState = {
 function setDrugPrices() {
   let localDrugs = Object.assign({}, DRUGS);
   Object.keys(localDrugs).forEach((drugName) => {
-    localDrugs[drugName].price = localDrugs[drugName].index * 5;
+    const price = ~~(localDrugs[drugName].index * Math.random() * 10);
+    localDrugs[drugName].price = Math.max(localDrugs[drugName].index, price);
   });
   return localDrugs;
 }

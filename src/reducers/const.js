@@ -16,11 +16,11 @@ const LOCATIONS = [
 
 const DRUGS = {
   'Weed':    { index: 1 },
-  'Speed':   { index: 2 },
-  'Acid':    { index: 3 },
-  'Heroin':  { index: 6 },
-  'Ludes':   { index: 8 },
-  'Cocaine': { index: 10 },
+  'Speed':   { index: 10 },
+  'Acid':    { index: 20 },
+  'Heroin':  { index: 40 },
+  'Ludes':   { index: 70 },
+  'Cocaine': { index: 100 },
 };
 
 const MAX_DAYS = 5;

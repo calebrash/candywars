@@ -10,7 +10,7 @@ class Summary extends React.Component {
     return (
       <div>
         <h2>Summary</h2>
-        <h3>You made ${this.props.gameReducer.balance} in {MAX_DAYS}</h3>
+        <h3>You made ${this.props.gameReducer.balance} in {MAX_DAYS} days</h3>
         <button onClick={this.props.actions.restart}>
           Start over</button>
       </div>
