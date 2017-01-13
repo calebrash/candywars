@@ -1,15 +1,28 @@
 import React from 'react';
-import './app.css';
+import './app.scss';
+import { dispatch } from 'react-redux';
+
+import { VIEWS } from '../reducers/const';
+import Intro from './Intro';
+import Locations from './Locations';
+import Drugs from './Drugs';
+import Summary from './Summary';
 
 class AppComponent extends React.Component {
   render() {
-    return (
-      <div className="index"></div>
-    );
+    console.log('props', this.props.gameReducer);
+    switch (this.props.gameReducer.view) {
+      case VIEWS.LOCATIONS:
+        return <Locations />;
+      case VIEWS.DRUGS:
+        return <Drugs />;
+      case VIEWS.SUMMARY:
+        return <Summary />;
+      case VIEWS.INTRO:
+      default:
+        return <Intro />;
+    }
   }
 }
-
-AppComponent.defaultProps = {
-};
 
 export default AppComponent;
