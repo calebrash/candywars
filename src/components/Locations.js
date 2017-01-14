@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import pickLocation from '../actions/pickLocation';
+import { pickLocation } from '../actions';
 import Header from './Header';
 
 class Locations extends React.Component {

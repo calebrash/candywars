@@ -7,6 +7,7 @@ import Intro from './Intro';
 import Locations from './Locations';
 import Drugs from './Drugs';
 import Summary from './Summary';
+import Incident from './Incident';
 
 class AppComponent extends React.Component {
   render() {
@@ -18,6 +19,8 @@ class AppComponent extends React.Component {
         return <Drugs />;
       case VIEWS.SUMMARY:
         return <Summary />;
+      case VIEWS.INCIDENT:
+        return <Incident />;
       case VIEWS.INTRO:
       default:
         return <Intro />;

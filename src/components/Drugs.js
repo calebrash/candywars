@@ -2,7 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { DRUGS } from '../reducers/const';
-import buyDrugs from '../actions/buyDrugs';
+import { buyDrugs } from '../actions';
 import Header from './Header';
 
 

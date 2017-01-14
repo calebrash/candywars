@@ -1,5 +1,6 @@
 const MAX_DAYS = 5;
 const START_BALANCE = 1000;
+const INCIDENT_FREQUENCY = 0.1;
 
 const VIEWS = {
     INTRO: 1,
@@ -26,8 +27,26 @@ const DRUGS = {
   'Cocaine': { index: 100 },
 };
 
-const INCIDENTS = {
-};
+const INCIDENTS = [
+  {
+    title: 'Officer Hardass caught you buying drugs. You gave him $200 for a bribe.',
+    state: {
+      balance: -200
+    }
+  },
+  {
+    title: 'You found a old trenchcoat in an alley. Now you can carry more drugs.',
+    state: {
+      capacity: 200
+    }
+  },
+  {
+    title: 'You got in a fight with a crackhead and won. +$200!',
+    state: {
+      capacity: 200
+    }
+  },
+];
 
 export {
     MAX_DAYS,
@@ -35,4 +54,6 @@ export {
     VIEWS,
     LOCATIONS,
     DRUGS,
+    INCIDENTS,
+    INCIDENT_FREQUENCY,
 }

@@ -3,7 +3,7 @@ import {
   NEXT_DAY,
   PICK_LOCATION,
   BUY_DRUGS,
-  RESTART,
+  SWITCH_VIEW,
 } from '../actions/const';
 import {
   LOCATIONS,
@@ -11,6 +11,8 @@ import {
   VIEWS,
   MAX_DAYS,
   START_BALANCE,
+  INCIDENTS,
+  INCIDENT_FREQUENCY,
 } from './const';
 
 const initialState = {
@@ -21,37 +23,60 @@ const initialState = {
   capacity: 100,
   locations: LOCATIONS,
   drugs: setDrugPrices(),
-  incident: setIncident(),
+  incident: null,
 };
+
+function floor(n) {
+  return ~~n;
+}
 
 function setDrugPrices() {
   let localDrugs = Object.assign({}, DRUGS);
   Object.keys(localDrugs).forEach((drugName) => {
-    const price = ~~(localDrugs[drugName].index * Math.random() * 10);
+    const price = floor(localDrugs[drugName].index * Math.random() * 10);
     localDrugs[drugName].price = Math.max(localDrugs[drugName].index, price);
   });
   return localDrugs;
 }
 
-function setIncident() {
-  return null;
+function getIncident() {
+  if (Math.random() <= INCIDENT_FREQUENCY) {
+    return INCIDENTS[floor(Math.random() * (INCIDENTS.length))];
+  }
+}
+
+function applyIncident(state, incident) {
+  let updates = {};
+  Object.keys(incident.state).forEach((stateName) => {
+    updates[stateName] = incident.state[stateName] + state[stateName]
+  });
+  return updates;
 }
 
 function reducer(state=initialState, action) {
   let updates = {};
   switch (action.type) {
-    case START_GAME:
-    case NEXT_DAY:
-      updates = {
-        view: VIEWS.LOCATIONS,
-        drugs: setDrugPrices(),
-      };
-      break;
+
     case PICK_LOCATION:
-      updates = {
-        view: VIEWS.DRUGS,
-      };
+      let incident = getIncident();
+      if (incident) {
+        updates = Object.assign({}, applyIncident(state, incident), {
+          view: VIEWS.INCIDENT,
+          incident,
+        });
+      } else {
+        updates = {
+          view: VIEWS.DRUGS,
+        };
+      }
       break;
+
+    case SWITCH_VIEW:
+      updates = {
+        view: action.view,
+      }
+      break;
+
     case BUY_DRUGS:
       updates = {
         inventory: Object.assign({}, state.inventory, action.inventory),
@@ -67,12 +92,15 @@ function reducer(state=initialState, action) {
         });
       }
       break;
-    case RESTART:
+
+    case START_GAME:
       updates = Object.assign({}, initialState, {
-        view: VIEWS.LOCATIONS
+        view: VIEWS.LOCATIONS,
+        drugs: setDrugPrices(),
       });
       break;
   }
+  console.log('action', action);
   console.log('updates', updates);
   return Object.assign({}, state, updates);
 }

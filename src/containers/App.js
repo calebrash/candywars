@@ -13,7 +13,8 @@ import {
   nextDay,
   pickLocation,
   buyDrugs,
-  restart
+  restart,
+  switchView
 } from '../actions/';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -47,7 +48,8 @@ function mapDispatchToProps(dispatch) {
     nextDay,
     pickLocation,
     buyDrugs,
-    restart
+    restart,
+    switchView
   };
   const actionMap = { actions: bindActionCreators(actions, dispatch) };
   return actionMap;

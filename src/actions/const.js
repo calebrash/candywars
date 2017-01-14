@@ -4,3 +4,4 @@ export const NEXT_DAY = 'NEXT_DAY';
 export const PICK_LOCATION = 'PICK_LOCATION';
 export const BUY_DRUGS = 'BUY_DRUGS';
 export const RESTART = 'RESTART';
+export const SWITCH_VIEW = 'SWITCH_VIEW';
