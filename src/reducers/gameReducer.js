@@ -100,8 +100,6 @@ function reducer(state=initialState, action) {
       });
       break;
   }
-  console.log('action', action);
-  console.log('updates', updates);
   return Object.assign({}, state, updates);
 }
 

@@ -11,7 +11,6 @@ import Incident from './Incident';
 
 class AppComponent extends React.Component {
   render() {
-    console.log('props', this.props.gameReducer);
     switch (this.props.gameReducer.view) {
       case VIEWS.LOCATIONS:
         return <Locations />;
