@@ -9,7 +9,7 @@ class Locations extends React.Component {
     return this.props.gameReducer.locations.map((location) => {
       return (
         <li key={`location-${location.toLowerCase()}`}>
-          <button onClick={() => this.props.actions.pickLocation(location)}>
+          <button className="btn" onClick={() => this.props.actions.pickLocation(location)}>
             {location}
           </button>
         </li>
@@ -18,7 +18,7 @@ class Locations extends React.Component {
   }
   render() {
     return (
-      <div className="game">
+      <div className="locations">
         <h2>Where do you want to go?</h2>
         <Header />
         <ul>

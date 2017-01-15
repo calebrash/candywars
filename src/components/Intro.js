@@ -8,7 +8,7 @@ class Intro extends React.Component {
     return (
       <div className="intro">
         <h1>Welcome to Dopewars!</h1>
-        <button onClick={this.props.actions.startGame}>
+        <button className="btn" onClick={this.props.actions.startGame}>
           Start
         </button>
       </div>

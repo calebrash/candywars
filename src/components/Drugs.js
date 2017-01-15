@@ -58,46 +58,64 @@ class Drugs extends React.Component {
   drugList() {
     return Object.keys(this.props.gameReducer.drugs).map((drugName) => {
         const drug = this.props.gameReducer.drugs[drugName];
+        const subtotal = this.getItemSubtotal(drugName);
+        let subtotalClass = '';
+        if (subtotal > 0) {
+          subtotalClass = 'buy';
+        } else if (subtotal < 0) {
+          subtotalClass = 'sell';
+        }
         return (
           <tr key={`drug-${drugName}`}>
-            <td>{drugName}</td>
-            <td>{drug.price}</td>
-            <td>{this.props.gameReducer.inventory[drugName] || 0}</td>
-            <td>
+            <td className="drug">{drugName}</td>
+            <td className="price">{drug.price}</td>
+            <td className="inventory">{this.props.gameReducer.inventory[drugName] || 0}</td>
+            <td className="input">
               <input type="number"
                 value={this.state.localInventory[drugName] || 0}
                 onChange={(e) => this.setInventory(drugName, parseInt(e.target.value, 10))} />
             </td>
-            <td>{this.getItemSubtotal(drugName)}</td>
+            <td className="subtotal">
+              <span className={subtotalClass}>{Math.abs(subtotal)}</span>
+            </td>
           </tr>
         );
     });
   }
   render() {
+    const total = this.getTotal();
+    let totalClass = '';
+    if (total > 0) {
+      totalClass = 'buy';
+    } else if (total < 0) {
+      totalClass = 'sell';
+    }
     return (
-      <div>
-        <h1>What do you want to buy?</h1>
+      <div className="drugs">
+        <h2>What do you want to buy?</h2>
         <Header />
         <form onSubmit={(e) => this.handleSubmit(e)}>
           <table>
             <thead>
               <tr>
-                <th>Drug</th>
-                <th>Price</th>
-                <th>Current inventory</th>
-                <th>Buy/Sell</th>
-                <th>Subtotal</th>
+                <th className="drug">Drug</th>
+                <th className="price">Price</th>
+                <th className="inventory">Current inventory</th>
+                <th className="input">Buy/Sell</th>
+                <th className="subtotal">Subtotal</th>
               </tr>
             </thead>
             <tbody>
               {this.drugList()}
-              <tr>
+              <tr className="total">
                 <td colSpan="4">Total</td>
-                <td>{this.getTotal()}</td>
+                <td>
+                  <span className={totalClass}>{Math.abs(total)}</span>
+                </td>
               </tr>
             </tbody>
           </table>
-          <button type="submit">Done</button>
+          <button className="btn" type="submit">Done</button>
         </form>
       </div>
     );

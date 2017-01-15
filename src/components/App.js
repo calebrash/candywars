@@ -1,5 +1,5 @@
 import React from 'react';
-import './app.scss';
+import '../styles/index.scss';
 import { dispatch } from 'react-redux';
 
 import { VIEWS } from '../reducers/const';

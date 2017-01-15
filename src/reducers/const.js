@@ -29,21 +29,24 @@ const DRUGS = {
 
 const INCIDENTS = [
   {
-    title: 'Officer Hardass caught you buying drugs. You gave him $200 for a bribe.',
+    title: 'Officer Hardass caught you buying drugs.',
+    subtitle: 'You gave him $200 for a bribe.',
     state: {
       balance: -200
     }
   },
   {
-    title: 'You found a old trenchcoat in an alley. Now you can carry more drugs.',
+    title: 'You found a old trenchcoat in an alley.',
+    subtitle: 'Now you can carry more drugs!',
     state: {
       capacity: 200
     }
   },
   {
-    title: 'You got in a fight with a crackhead and won. +$200!',
+    title: 'You took some dude\'s wallet.',
+    subtitle: 'There was $200 in there!',
     state: {
-      capacity: 200
+      balance: 200
     }
   },
 ];

@@ -1,0 +1,10 @@
+.header {
+  color: $gray-3;
+  font-size: 0.9em;
+  span {
+    margin-right: 14px;
+    &::last-child {
+      margin: 0;
+    }
+  }
+}

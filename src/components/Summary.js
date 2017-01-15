@@ -9,10 +9,10 @@ class Summary extends React.Component {
   render() {
     const endingBalance = this.props.gameReducer.balance - START_BALANCE;
     return (
-      <div>
-        <h2>Summary</h2>
-        <h3>You {endingBalance >= 0 ? 'made' : 'lost'} ${Math.abs(endingBalance)} in {MAX_DAYS} days</h3>
-        <button onClick={this.props.actions.startGame}>Start over</button>
+      <div className="summary">
+        <h1>Game over</h1>
+        <h2>You {endingBalance >= 0 ? 'made' : 'lost'} ${Math.abs(endingBalance)} in {MAX_DAYS} days</h2>
+        <button className="btn" onClick={this.props.actions.startGame}>Start over</button>
       </div>
     );
   }

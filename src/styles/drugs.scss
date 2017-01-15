@@ -1,0 +1,69 @@
+.drugs {
+  table {
+    width: 100%;
+    margin-top: 24px;
+    text-align: left;
+  }
+  th {
+    vertical-align: bottom;
+  }
+  th,
+  td {
+    padding: 4px 8px;
+    &:first-child {
+      padding-left: 0;
+    }
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+  .drug {
+  }
+  .price {
+    text-align: right;
+  }
+  .inventory {
+    width: 120px;
+    text-align: right;
+  }
+  .input {
+    input {
+      width: 80px;
+      text-align: right;
+    }
+  }
+  .subtotal {
+    width: 100px;
+    text-align: right;
+    span {
+      color: $gray-3;
+    }
+    .buy {
+      color: $green;
+    }
+    .sell {
+      color: $red;
+    }
+  }
+  .total {
+    font-size: 1.1em;
+    font-weight: bold;
+    td {
+      padding-top: 8px;
+      &:last-child {
+        text-align: right;
+        color: $gray-3;
+      }
+    }
+    .buy {
+      color: $green;
+    }
+    .sell {
+      color: $red;
+    }
+  }
+  .btn {
+    margin-top: 24px;
+    width: 200px;
+  }
+}
