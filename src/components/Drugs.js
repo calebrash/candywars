@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { DRUGS } from '../reducers/const';
 import { buyDrugs } from '../actions';
 import Header from './Header';
+import { commatize } from './utils';
 
 
 class Drugs extends React.Component {
@@ -68,15 +69,15 @@ class Drugs extends React.Component {
         return (
           <tr key={`drug-${drugName}`}>
             <td className="drug">{drugName}</td>
-            <td className="price">{drug.price}</td>
-            <td className="inventory">{this.props.gameReducer.inventory[drugName] || 0}</td>
+            <td className="price">{commatize(drug.price)}</td>
+            <td className="inventory">{commatize(this.props.gameReducer.inventory[drugName] || 0)}</td>
             <td className="input">
               <input type="number"
                 value={this.state.localInventory[drugName] || 0}
                 onChange={(e) => this.setInventory(drugName, parseInt(e.target.value, 10))} />
             </td>
             <td className="subtotal">
-              <span className={subtotalClass}>{Math.abs(subtotal)}</span>
+              <span className={subtotalClass}>{commatize(Math.abs(subtotal))}</span>
             </td>
           </tr>
         );
@@ -110,7 +111,7 @@ class Drugs extends React.Component {
               <tr className="total">
                 <td colSpan="4">Total</td>
                 <td>
-                  <span className={totalClass}>{Math.abs(total)}</span>
+                  <span className={totalClass}>{commatize(Math.abs(total))}</span>
                 </td>
               </tr>
             </tbody>
