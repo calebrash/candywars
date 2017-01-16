@@ -1,4 +1,4 @@
-const MAX_DAYS = 5;
+const MAX_DAYS = 30;
 const START_BALANCE = 1000;
 const INCIDENT_FREQUENCY = 0.1;
 
