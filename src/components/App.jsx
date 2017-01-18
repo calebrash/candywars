@@ -1,13 +1,11 @@
-import React from 'react';
-import '../styles/index.scss';
-import { dispatch } from 'react-redux';
-
-import { VIEWS } from '../reducers/const';
+import React, { PropTypes } from 'react';
 import Intro from './Intro';
 import Locations from './Locations';
 import Drugs from './Drugs';
 import Summary from './Summary';
 import Incident from './Incident';
+import { VIEWS } from '../reducers/const';
+import '../styles/index.scss';
 
 class AppComponent extends React.Component {
   render() {
@@ -26,5 +24,11 @@ class AppComponent extends React.Component {
     }
   }
 }
+
+AppComponent.propTypes = {
+  gameReducer: PropTypes.shape({
+    view: PropTypes.number,
+  }),
+};
 
 export default AppComponent;

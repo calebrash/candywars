@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { MAX_DAYS, START_BALANCE } from '../reducers/const';
@@ -20,8 +20,14 @@ class Summary extends React.Component {
 }
 
 Summary.displayName = 'Summary';
-Summary.propTypes = {};
-Summary.defaultProps = {};
+Summary.propTypes = {
+  actions: PropTypes.shape({
+    startGame: PropTypes.func.isRequired,
+  }),
+  gameReducer: PropTypes.shape({
+    balance: PropTypes.number,
+  }),
+};
 
 function mapStateToProps(state) {
   return {

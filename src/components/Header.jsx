@@ -1,13 +1,11 @@
-import React from 'react';
-import { bindActionCreators } from 'redux';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { commatize } from './utils';
 
 class Header extends React.Component {
   render() {
-    let inventoryTotal = Object.keys(this.props.gameReducer.inventory).reduce((total, drug) => {
-      return total + this.props.gameReducer.inventory[drug];
-    }, 0);
+    const inventoryTotal = Object.keys(this.props.gameReducer.inventory)
+      .reduce((total, drug) => total + this.props.gameReducer.inventory[drug], 0);
     return (
       <div className="header">
         <span>Day: {this.props.gameReducer.day}</span>
@@ -19,8 +17,14 @@ class Header extends React.Component {
 }
 
 Header.displayName = 'Header';
-Header.propTypes = {};
-Header.defaultProps = {};
+Header.propTypes = {
+  gameReducer: PropTypes.shape({
+    day: PropTypes.number,
+    balance: PropTypes.number,
+    inventory: PropTypes.object,
+    capacity: PropTypes.number,
+  }),
+};
 
 function mapStateToProps(state) {
   return {

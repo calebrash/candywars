@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Header from './Header';
@@ -19,8 +19,14 @@ class Incident extends React.Component {
 }
 
 Incident.displayName = 'Incident';
-Incident.propTypes = {};
-Incident.defaultProps = {};
+Incident.propTypes = {
+  actions: PropTypes.shape({
+    switchView: PropTypes.func.isRequired,
+  }),
+  gameReducer: PropTypes.shape({
+    incident: PropTypes.object,
+  }),
+};
 
 function mapStateToProps(state) {
   return {

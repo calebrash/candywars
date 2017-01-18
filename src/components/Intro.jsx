@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { startGame } from '../actions/';
@@ -19,8 +19,11 @@ class Intro extends React.Component {
 }
 
 Intro.displayName = 'Intro';
-Intro.propTypes = {};
-Intro.defaultProps = {};
+Intro.propTypes = {
+  actions: PropTypes.shape({
+    startGame: PropTypes.func.isRequired,
+  }),
+};
 
 function mapStateToProps(state) {
   return {

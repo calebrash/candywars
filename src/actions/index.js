@@ -5,16 +5,16 @@ Allows to import actions like so:
 import {action1, action2} from '../actions/'
 */
 /* Populated by react-webpack-redux:action */
-import switchView from '../actions/switchView.js';
-import buyDrugs from '../actions/buyDrugs.js';
-import pickLocation from '../actions/pickLocation.js';
-import nextDay from '../actions/nextDay.js';
-import startGame from '../actions/startGame.js';
+import switchView from '../actions/switchView';
+import buyDrugs from '../actions/buyDrugs';
+import pickLocation from '../actions/pickLocation';
+import startGame from '../actions/startGame';
+
 const actions = {
   startGame,
-  nextDay,
   pickLocation,
   buyDrugs,
-  switchView
+  switchView,
 };
+
 module.exports = actions;

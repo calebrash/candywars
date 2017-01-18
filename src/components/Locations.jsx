@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { pickLocation } from '../actions';
@@ -6,15 +6,13 @@ import Header from './Header';
 
 class Locations extends React.Component {
   locationList() {
-    return this.props.gameReducer.locations.map((location) => {
-      return (
-        <li key={`location-${location.toLowerCase()}`}>
-          <button className="btn" onClick={() => this.props.actions.pickLocation(location)}>
-            {location}
-          </button>
-        </li>
-      );
-    });
+    return this.props.gameReducer.locations.map(location =>
+      <li key={`location-${location.toLowerCase()}`}>
+        <button className="btn" onClick={() => this.props.actions.pickLocation(location)}>
+          {location}
+        </button>
+      </li>
+    );
   }
   render() {
     return (
@@ -30,8 +28,14 @@ class Locations extends React.Component {
 }
 
 Locations.displayName = 'Locations';
-Locations.propTypes = {};
-Locations.defaultProps = {};
+Locations.propTypes = {
+  actions: PropTypes.shape({
+    pickLocation: PropTypes.func.isRequired,
+  }),
+  gameReducer: PropTypes.shape({
+    locations: PropTypes.array,
+  }),
+};
 
 function mapStateToProps(state) {
   return {

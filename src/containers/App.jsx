@@ -8,15 +8,14 @@ import React, {
   Component,
   PropTypes
 } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import {
   startGame,
-  nextDay,
   pickLocation,
   buyDrugs,
   switchView
 } from '../actions/';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import Main from '../components/App';
 /* Populated by react-webpack-redux:reducer */
 class App extends Component {
@@ -31,8 +30,22 @@ class App extends Component {
  *       adjust it here.
  */
 App.propTypes = {
-  actions: PropTypes.object.isRequired,
-  gameReducer: PropTypes.object.isRequired
+  actions: PropTypes.shape({
+    startGame: PropTypes.func.isRequired,
+    pickLocation: PropTypes.func.isRequired,
+    buyDrugs: PropTypes.func.isRequired,
+    switchView: PropTypes.func.isRequired,
+  }),
+  gameReducer: PropTypes.shape({
+    view: PropTypes.number,
+    day: PropTypes.number,
+    balance: PropTypes.number,
+    inventory: PropTypes.object,
+    capacity: PropTypes.number,
+    locations: PropTypes.array,
+    drugs: PropTypes.object,
+    incident: PropTypes.object,
+  }),
 };
 function mapStateToProps(state) {
   // eslint-disable-line no-unused-vars
@@ -44,7 +57,6 @@ function mapDispatchToProps(dispatch) {
   /* Populated by react-webpack-redux:action */
   const actions = {
     startGame,
-    nextDay,
     pickLocation,
     buyDrugs,
     switchView

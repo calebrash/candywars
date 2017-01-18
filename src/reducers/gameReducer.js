@@ -1,6 +1,5 @@
 import {
   START_GAME,
-  NEXT_DAY,
   PICK_LOCATION,
   BUY_DRUGS,
   SWITCH_VIEW,
@@ -22,18 +21,14 @@ const initialState = {
   inventory: {},
   capacity: 100,
   locations: LOCATIONS,
-  drugs: setDrugPrices(),
+  drugs: {},
   incident: null,
 };
 
-function floor(n) {
-  return ~~n;
-}
-
 function setDrugPrices() {
-  let localDrugs = Object.assign({}, DRUGS);
+  const localDrugs = Object.assign({}, DRUGS);
   Object.keys(localDrugs).forEach((drugName) => {
-    const price = floor(localDrugs[drugName].index * Math.random() * 10);
+    const price = Math.floor(localDrugs[drugName].index * Math.random() * 10);
     localDrugs[drugName].price = Math.max(localDrugs[drugName].index, price);
   });
   return localDrugs;
@@ -41,24 +36,24 @@ function setDrugPrices() {
 
 function getIncident() {
   if (Math.random() <= INCIDENT_FREQUENCY) {
-    return INCIDENTS[floor(Math.random() * (INCIDENTS.length))];
+    return INCIDENTS[Math.floor(Math.random() * (INCIDENTS.length))];
   }
+  return null;
 }
 
 function applyIncident(state, incident) {
-  let updates = {};
+  const updates = {};
   Object.keys(incident.state).forEach((stateName) => {
-    updates[stateName] = incident.state[stateName] + state[stateName]
+    updates[stateName] = incident.state[stateName] + state[stateName];
   });
   return updates;
 }
 
-function reducer(state=initialState, action) {
+function reducer(state = initialState, action) {
   let updates = {};
   switch (action.type) {
-
-    case PICK_LOCATION:
-      let incident = getIncident();
+    case PICK_LOCATION: {
+      const incident = getIncident();
       if (incident) {
         updates = Object.assign({}, applyIncident(state, incident), {
           view: VIEWS.INCIDENT,
@@ -70,18 +65,20 @@ function reducer(state=initialState, action) {
         };
       }
       break;
+    }
 
-    case SWITCH_VIEW:
+    case SWITCH_VIEW: {
       updates = {
         view: action.view,
-      }
+      };
       break;
+    }
 
-    case BUY_DRUGS:
+    case BUY_DRUGS: {
       updates = {
         inventory: Object.assign({}, state.inventory, action.inventory),
         balance: state.balance - action.total,
-      }
+      };
       if (state.day + 1 === MAX_DAYS) {
         updates.view = VIEWS.SUMMARY;
       } else {
@@ -92,13 +89,16 @@ function reducer(state=initialState, action) {
         });
       }
       break;
+    }
 
     case START_GAME:
+    default: {
       updates = Object.assign({}, initialState, {
         view: VIEWS.LOCATIONS,
         drugs: setDrugPrices(),
       });
       break;
+    }
   }
   return Object.assign({}, state, updates);
 }

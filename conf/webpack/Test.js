@@ -20,7 +20,7 @@ class WebpackTestConfig extends WebpackBaseConfig {
     this.config = {
       devtool: 'inline-source-map',
       entry: [
-        './client.js'
+        './client.jsx'
       ],
       externals: {
         cheerio: 'window',

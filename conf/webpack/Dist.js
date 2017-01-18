@@ -15,7 +15,7 @@ class WebpackDistConfig extends WebpackBaseConfig {
       cache: false,
       devtool: 'source-map',
       entry: [
-        './client.js'
+        './client.jsx'
       ],
       plugins: [
         new webpack.DefinePlugin({
