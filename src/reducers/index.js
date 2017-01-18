@@ -8,9 +8,9 @@
  */
 /* Populated by react-webpack-redux:reducer */
 import { combineReducers } from 'redux';
-import gameReducer from '../reducers/gameReducer';
+import game from '../reducers/game';
 
-const reducers = { gameReducer };
+const reducers = { game };
 const combined = combineReducers(reducers);
 
 module.exports = combined;

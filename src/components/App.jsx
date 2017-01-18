@@ -9,7 +9,7 @@ import '../styles/index.scss';
 
 class AppComponent extends React.Component {
   render() {
-    switch (this.props.gameReducer.view) {
+    switch (this.props.game.view) {
       case VIEWS.LOCATIONS:
         return <Locations />;
       case VIEWS.DRUGS:
@@ -26,7 +26,7 @@ class AppComponent extends React.Component {
 }
 
 AppComponent.propTypes = {
-  gameReducer: PropTypes.shape({
+  game: PropTypes.shape({
     view: PropTypes.number,
   }),
 };

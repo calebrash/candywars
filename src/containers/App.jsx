@@ -20,8 +20,8 @@ import Main from '../components/App';
 /* Populated by react-webpack-redux:reducer */
 class App extends Component {
   render() {
-    const {actions, gameReducer} = this.props;
-    return <Main actions={actions} gameReducer={gameReducer}/>;
+    const {actions, game} = this.props;
+    return <Main actions={actions} game={game}/>;
   }
 }
 /* Populated by react-webpack-redux:reducer
@@ -36,7 +36,7 @@ App.propTypes = {
     buyDrugs: PropTypes.func.isRequired,
     switchView: PropTypes.func.isRequired,
   }),
-  gameReducer: PropTypes.shape({
+  game: PropTypes.shape({
     view: PropTypes.number,
     day: PropTypes.number,
     balance: PropTypes.number,
@@ -50,7 +50,7 @@ App.propTypes = {
 function mapStateToProps(state) {
   // eslint-disable-line no-unused-vars
   /* Populated by react-webpack-redux:reducer */
-  const props = { gameReducer: state.gameReducer };
+  const props = { game: state.game };
   return props;
 }
 function mapDispatchToProps(dispatch) {

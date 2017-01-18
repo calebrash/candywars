@@ -9,8 +9,8 @@ class Incident extends React.Component {
   render() {
     return (
       <div className="incident">
-        <h2>{this.props.gameReducer.incident.title}</h2>
-        <h3>{this.props.gameReducer.incident.subtitle}</h3>
+        <h2>{this.props.game.incident.title}</h2>
+        <h3>{this.props.game.incident.subtitle}</h3>
         <Header />
         <button className="btn" onClick={() => this.props.actions.switchView(VIEWS.DRUGS)}>Continue</button>
       </div>
@@ -23,14 +23,14 @@ Incident.propTypes = {
   actions: PropTypes.shape({
     switchView: PropTypes.func.isRequired,
   }),
-  gameReducer: PropTypes.shape({
+  game: PropTypes.shape({
     incident: PropTypes.object,
   }),
 };
 
 function mapStateToProps(state) {
   return {
-    gameReducer: state.gameReducer
+    game: state.game
   };
 }
 function mapDispatchToProps(dispatch) {

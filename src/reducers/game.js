@@ -91,13 +91,16 @@ function reducer(state = initialState, action) {
       break;
     }
 
-    case START_GAME:
-    default: {
+    case START_GAME: {
       updates = Object.assign({}, initialState, {
         view: VIEWS.LOCATIONS,
         drugs: setDrugPrices(),
       });
       break;
+    }
+
+    default: {
+      // no change
     }
   }
   return Object.assign({}, state, updates);

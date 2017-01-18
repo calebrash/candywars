@@ -27,7 +27,7 @@ Intro.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    gameReducer: state.gameReducer
+    game: state.game
   };
 }
 function mapDispatchToProps(dispatch) {

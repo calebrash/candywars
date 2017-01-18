@@ -9,14 +9,14 @@ class Drugs extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      localInventory: Object.assign({}, this.props.gameReducer.inventory),
+      localInventory: Object.assign({}, this.props.game.inventory),
     };
   }
   setInventory(drugName, value) {
     const preventInventoryChange = (
       value < 0
-      || (this.getTotal(drugName, value) > this.props.gameReducer.balance)
-      || (this.getCapacity(drugName, value) > this.props.gameReducer.capacity)
+      || (this.getTotal(drugName, value) > this.props.game.balance)
+      || (this.getCapacity(drugName, value) > this.props.game.capacity)
     );
     if (preventInventoryChange) {
       return;
@@ -29,12 +29,12 @@ class Drugs extends React.Component {
     });
   }
   getItemSubtotal(drugName, valueOverride) {
-    const currentValue = this.props.gameReducer.inventory[drugName] || 0;
+    const currentValue = this.props.game.inventory[drugName] || 0;
     const updatedValue = valueOverride || this.state.localInventory[drugName] || 0;
-    return (currentValue - updatedValue) * -1 * this.props.gameReducer.drugs[drugName].price;
+    return (currentValue - updatedValue) * -1 * this.props.game.drugs[drugName].price;
   }
   getTotal(drugOverride, valueOverride) {
-    return Object.keys(this.props.gameReducer.drugs).reduce((subtotal, drug) => {
+    return Object.keys(this.props.game.drugs).reduce((subtotal, drug) => {
       if (drugOverride && drug === drugOverride) {
         return subtotal + this.getItemSubtotal(drug, valueOverride);
       }
@@ -42,7 +42,7 @@ class Drugs extends React.Component {
     }, 0);
   }
   getCapacity(drugOverride, valueOverride) {
-    return Object.keys(this.props.gameReducer.drugs).reduce((subtotal, drug) => {
+    return Object.keys(this.props.game.drugs).reduce((subtotal, drug) => {
       if (drugOverride && drug === drugOverride) {
         return subtotal + valueOverride;
       }
@@ -54,8 +54,8 @@ class Drugs extends React.Component {
     this.props.actions.buyDrugs(this.state.localInventory, this.getTotal());
   }
   drugList() {
-    return Object.keys(this.props.gameReducer.drugs).map((drugName) => {
-      const drug = this.props.gameReducer.drugs[drugName];
+    return Object.keys(this.props.game.drugs).map((drugName) => {
+      const drug = this.props.game.drugs[drugName];
       const subtotal = this.getItemSubtotal(drugName);
       let subtotalClass = '';
       if (subtotal > 0) {
@@ -67,7 +67,7 @@ class Drugs extends React.Component {
         <tr key={`drug-${drugName}`}>
           <td className="drug">{drugName}</td>
           <td className="price">{commatize(drug.price)}</td>
-          <td className="inventory">{commatize(this.props.gameReducer.inventory[drugName] || 0)}</td>
+          <td className="inventory">{commatize(this.props.game.inventory[drugName] || 0)}</td>
           <td className="input">
             <input
               type="number"
@@ -126,7 +126,7 @@ Drugs.propTypes = {
   actions: PropTypes.shape({
     buyDrugs: PropTypes.func.isRequired,
   }),
-  gameReducer: PropTypes.shape({
+  game: PropTypes.shape({
     balance: PropTypes.number,
     inventory: PropTypes.object,
     capacity: PropTypes.number,
@@ -136,7 +136,7 @@ Drugs.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    gameReducer: state.gameReducer
+    game: state.game
   };
 }
 function mapDispatchToProps(dispatch) {

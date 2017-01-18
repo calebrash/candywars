@@ -1,6 +1,6 @@
-var reducer = require('../../src/reducers/gameReducer');
+var reducer = require('../../src/reducers/game');
 
-describe('gameReducer', () => {
+describe('game', () => {
 
   it('should not change the passed state', (done) => {
 

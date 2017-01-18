@@ -8,7 +8,7 @@ import { commatize } from './utils';
 class Summary extends React.Component {
 
   render() {
-    const endingBalance = this.props.gameReducer.balance - START_BALANCE;
+    const endingBalance = this.props.game.balance - START_BALANCE;
     return (
       <div className="summary">
         <h1>Game over</h1>
@@ -24,14 +24,14 @@ Summary.propTypes = {
   actions: PropTypes.shape({
     startGame: PropTypes.func.isRequired,
   }),
-  gameReducer: PropTypes.shape({
+  game: PropTypes.shape({
     balance: PropTypes.number,
   }),
 };
 
 function mapStateToProps(state) {
   return {
-    gameReducer: state.gameReducer
+    game: state.game
   };
 }
 function mapDispatchToProps(dispatch) {

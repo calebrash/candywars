@@ -6,7 +6,7 @@ import Header from './Header';
 
 class Locations extends React.Component {
   locationList() {
-    return this.props.gameReducer.locations.map(location =>
+    return this.props.game.locations.map(location =>
       <li key={`location-${location.toLowerCase()}`}>
         <button className="btn" onClick={() => this.props.actions.pickLocation(location)}>
           {location}
@@ -32,14 +32,14 @@ Locations.propTypes = {
   actions: PropTypes.shape({
     pickLocation: PropTypes.func.isRequired,
   }),
-  gameReducer: PropTypes.shape({
+  game: PropTypes.shape({
     locations: PropTypes.array,
   }),
 };
 
 function mapStateToProps(state) {
   return {
-    gameReducer: state.gameReducer
+    game: state.game
   };
 }
 function mapDispatchToProps(dispatch) {
