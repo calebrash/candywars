@@ -25,11 +25,6 @@ Intro.propTypes = {
   }),
 };
 
-function mapStateToProps(state) {
-  return {
-    game: state.game
-  };
-}
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
@@ -38,4 +33,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Intro);
+export default connect(null, mapDispatchToProps)(Intro);
