@@ -1,18 +1,20 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Locations from 'components//Locations.js';
+import Locations from '../../src/components/Locations';
+import configureStore from '../../src/stores';
+
+const store = configureStore();
 
 describe('<Locations />', () => {
 
   let component;
   beforeEach(() => {
-    component = shallow(<Locations />);
+    component = shallow(<Locations store={store} />);
   });
 
   describe('when rendering the component', () => {
-
-    it('should have a className of "locations-component"', () => {
-      expect(component.hasClass('locations-component')).to.equal(true);
+    it('should should be an instance of <Locations />', () => {
+      expect(component.instance()).to.be.instanceOf(Locations);
     });
   });
 });
