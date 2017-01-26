@@ -2,16 +2,17 @@ import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { startGame } from '../actions/';
-import { MAX_DAYS } from '../reducers/const';
+import { MAX_DAYS, START_BALANCE, START_CAPACITY } from '../reducers/const';
 
 class Intro extends React.Component {
   render() {
     return (
       <div className="intro">
-        <h1>Welcome to Dopewars!</h1>
-        <h3>You have {MAX_DAYS} days to make as much money as possible.</h3>
+        <h1>Welcome to Candywars!</h1>
+        <h3>You need to make as much money as possible.</h3>
+        <p>You have {MAX_DAYS} days, ${START_BALANCE}, and {START_CAPACITY} spaces in your coat</p>
         <button className="btn" onClick={this.props.actions.startGame}>
-          Start
+          Get started
         </button>
       </div>
     );

@@ -5,12 +5,12 @@ import { commatize } from './utils';
 class Header extends React.Component {
   render() {
     const inventoryTotal = Object.keys(this.props.game.inventory)
-      .reduce((total, drug) => total + this.props.game.inventory[drug], 0);
+      .reduce((total, candy) => total + this.props.game.inventory[candy], 0);
     return (
       <div className="header">
-        <span>Day: {this.props.game.day}</span>
-        <span>Cash: {commatize(this.props.game.balance)}</span>
-        <span>Capacity: {this.props.game.capacity - inventoryTotal}</span>
+        <span>Day {this.props.game.day}</span>
+        <span>${commatize(this.props.game.balance)}</span>
+        <span>Coat: {this.props.game.capacity - inventoryTotal}</span>
       </div>
     );
   }

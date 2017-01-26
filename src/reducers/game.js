@@ -1,15 +1,16 @@
 import {
   START_GAME,
   PICK_LOCATION,
-  BUY_DRUGS,
+  BUY_CANDY,
   SWITCH_VIEW,
 } from '../actions/const';
 import {
   LOCATIONS,
-  DRUGS,
+  CANDY,
   VIEWS,
   MAX_DAYS,
   START_BALANCE,
+  START_CAPACITY,
   INCIDENTS,
   INCIDENT_FREQUENCY,
 } from './const';
@@ -19,19 +20,19 @@ const initialState = {
   day: 1,
   balance: START_BALANCE,
   inventory: {},
-  capacity: 100,
+  capacity: START_CAPACITY,
   locations: LOCATIONS,
-  drugs: {},
+  candy: {},
   incident: null,
 };
 
-function setDrugPrices() {
-  const localDrugs = Object.assign({}, DRUGS);
-  Object.keys(localDrugs).forEach((drugName) => {
-    const price = Math.floor(localDrugs[drugName].index * Math.random() * 10);
-    localDrugs[drugName].price = Math.max(localDrugs[drugName].index, price);
+function setCandyPrices() {
+  const localCandy = Object.assign({}, CANDY);
+  Object.keys(localCandy).forEach((candyName) => {
+    const price = Math.floor(localCandy[candyName].index * Math.random() * 10);
+    localCandy[candyName].price = Math.max(localCandy[candyName].index, price);
   });
-  return localDrugs;
+  return localCandy;
 }
 
 function getIncident() {
@@ -61,7 +62,7 @@ function reducer(state = initialState, action) {
         });
       } else {
         updates = {
-          view: VIEWS.DRUGS,
+          view: VIEWS.CANDY,
         };
       }
       break;
@@ -74,7 +75,7 @@ function reducer(state = initialState, action) {
       break;
     }
 
-    case BUY_DRUGS: {
+    case BUY_CANDY: {
       updates = {
         inventory: Object.assign({}, state.inventory, action.inventory),
         balance: state.balance - action.total,
@@ -84,7 +85,7 @@ function reducer(state = initialState, action) {
       } else {
         updates = Object.assign({}, updates, {
           day: state.day + 1,
-          drugs: setDrugPrices(),
+          candy: setCandyPrices(),
           view: VIEWS.LOCATIONS,
         });
       }
@@ -94,7 +95,7 @@ function reducer(state = initialState, action) {
     case START_GAME: {
       updates = Object.assign({}, initialState, {
         view: VIEWS.LOCATIONS,
-        drugs: setDrugPrices(),
+        candy: setCandyPrices(),
       });
       break;
     }

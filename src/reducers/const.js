@@ -1,11 +1,12 @@
 const MAX_DAYS = 30;
 const START_BALANCE = 1000;
+const START_CAPACITY = 100;
 const INCIDENT_FREQUENCY = 0.1;
 
 const VIEWS = {
   INTRO: 1,
   LOCATIONS: 2,
-  DRUGS: 3,
+  CANDY: 3,
   INCIDENT: 4,
   SUMMARY: 5,
 };
@@ -18,45 +19,45 @@ const LOCATIONS = [
   'Queens',
 ];
 
-const DRUGS = {
-  Weed: {
+const CANDY = {
+  Licorice: {
     index: 1,
   },
-  Speed: {
+  Gumdrops: {
     index: 10,
   },
-  Acid: {
+  Peppermints: {
     index: 20,
   },
-  Heroin: {
+  'Jelly Beans': {
     index: 40,
   },
-  Ludes: {
+  Taffy: {
     index: 70,
   },
-  Cocaine: {
+  'Chocolate Coins': {
     index: 100,
   },
 };
 
 const INCIDENTS = [
   {
-    title: 'Officer Hardass caught you buying drugs.',
-    subtitle: 'You gave him $200 for a bribe.',
+    title: 'You ate too much candy and now you feel sick.',
+    subtitle: 'Spend $200 at the doctor\'s office.',
     state: {
       balance: -200,
     }
   },
   {
-    title: 'You found a old trenchcoat in an alley.',
-    subtitle: 'Now you can carry more drugs!',
+    title: 'You found a old coat in an alley.',
+    subtitle: 'Now you can carry more candy!',
     state: {
       capacity: 200,
     }
   },
   {
-    title: 'You took some dude\'s wallet.',
-    subtitle: 'There was $200 in there!',
+    title: 'You found some money in a totally normal and legal way.',
+    subtitle: 'Yay, $200!',
     state: {
       balance: 200,
     }
@@ -66,9 +67,10 @@ const INCIDENTS = [
 export {
     MAX_DAYS,
     START_BALANCE,
+    START_CAPACITY,
     VIEWS,
     LOCATIONS,
-    DRUGS,
+    CANDY,
     INCIDENTS,
     INCIDENT_FREQUENCY,
 };

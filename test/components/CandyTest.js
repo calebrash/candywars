@@ -1,20 +1,20 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Drugs from '../../src/components/Drugs';
+import Candy from '../../src/components/Candy';
 import configureStore from '../../src/stores';
 
 const store = configureStore();
 
-describe('<Drugs />', () => {
+describe('<Candy />', () => {
 
   let component;
   beforeEach(() => {
-    component = shallow(<Drugs store={store} />);
+    component = shallow(<Candy store={store} />);
   });
 
   describe('when rendering the component', () => {
-    it('should should be an instance of <Drugs />', () => {
-      expect(component.instance()).to.be.instanceOf(Drugs);
+    it('should should be an instance of <Candy />', () => {
+      expect(component.instance()).to.be.instanceOf(Candy);
     });
   });
 });

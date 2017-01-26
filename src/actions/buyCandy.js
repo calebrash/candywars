@@ -1,8 +1,8 @@
-import { BUY_DRUGS } from './const';
+import { BUY_CANDY } from './const';
 
 function action(inventory, total) {
   return {
-    type: BUY_DRUGS,
+    type: BUY_CANDY,
     inventory,
     total,
   };

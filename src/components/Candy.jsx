@@ -1,62 +1,62 @@
 import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { buyDrugs } from '../actions';
+import { buyCandy } from '../actions';
 import Header from './Header';
 import { commatize } from './utils';
 
-class Drugs extends React.Component {
+class Candy extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       localInventory: Object.assign({}, this.props.game.inventory),
     };
   }
-  setInventory(drugName, value) {
+  setInventory(candyName, value) {
     const preventInventoryChange = (
       value < 0
-      || (this.getTotal(drugName, value) > this.props.game.balance)
-      || (this.getCapacity(drugName, value) > this.props.game.capacity)
+      || (this.getTotal(candyName, value) > this.props.game.balance)
+      || (this.getCapacity(candyName, value) > this.props.game.capacity)
     );
     if (preventInventoryChange) {
       return;
     }
 
     const localInventory = Object.assign({}, this.state.localInventory);
-    localInventory[drugName] = value;
+    localInventory[candyName] = value;
     this.setState({
       localInventory
     });
   }
-  getItemSubtotal(drugName, valueOverride) {
-    const currentValue = this.props.game.inventory[drugName] || 0;
-    const updatedValue = valueOverride || this.state.localInventory[drugName] || 0;
-    return (currentValue - updatedValue) * -1 * this.props.game.drugs[drugName].price;
+  getItemSubtotal(candyName, valueOverride) {
+    const currentValue = this.props.game.inventory[candyName] || 0;
+    const updatedValue = valueOverride || this.state.localInventory[candyName] || 0;
+    return (currentValue - updatedValue) * -1 * this.props.game.candy[candyName].price;
   }
-  getTotal(drugOverride, valueOverride) {
-    return Object.keys(this.props.game.drugs).reduce((subtotal, drug) => {
-      if (drugOverride && drug === drugOverride) {
-        return subtotal + this.getItemSubtotal(drug, valueOverride);
+  getTotal(candyOverride, valueOverride) {
+    return Object.keys(this.props.game.candy).reduce((subtotal, candy) => {
+      if (candyOverride && candy === candyOverride) {
+        return subtotal + this.getItemSubtotal(candy, valueOverride);
       }
-      return subtotal + this.getItemSubtotal(drug);
+      return subtotal + this.getItemSubtotal(candy);
     }, 0);
   }
-  getCapacity(drugOverride, valueOverride) {
-    return Object.keys(this.props.game.drugs).reduce((subtotal, drug) => {
-      if (drugOverride && drug === drugOverride) {
+  getCapacity(candyOverride, valueOverride) {
+    return Object.keys(this.props.game.candy).reduce((subtotal, candy) => {
+      if (candyOverride && candy === candyOverride) {
         return subtotal + valueOverride;
       }
-      return subtotal + (this.state.localInventory[drug] || 0);
+      return subtotal + (this.state.localInventory[candy] || 0);
     }, 0);
   }
   handleSubmit(e) {
     e.preventDefault();
-    this.props.actions.buyDrugs(this.state.localInventory, this.getTotal());
+    this.props.actions.buyCandy(this.state.localInventory, this.getTotal());
   }
-  drugList() {
-    return Object.keys(this.props.game.drugs).map((drugName) => {
-      const drug = this.props.game.drugs[drugName];
-      const subtotal = this.getItemSubtotal(drugName);
+  candyList() {
+    return Object.keys(this.props.game.candy).map((candyName) => {
+      const candy = this.props.game.candy[candyName];
+      const subtotal = this.getItemSubtotal(candyName);
       let subtotalClass = '';
       if (subtotal > 0) {
         subtotalClass = 'buy';
@@ -64,15 +64,15 @@ class Drugs extends React.Component {
         subtotalClass = 'sell';
       }
       return (
-        <tr key={`drug-${drugName}`}>
-          <td className="drug">{drugName}</td>
-          <td className="price">{commatize(drug.price)}</td>
-          <td className="inventory">{commatize(this.props.game.inventory[drugName] || 0)}</td>
+        <tr key={`candy-${candyName}`}>
+          <td className="candy">{candyName}</td>
+          <td className="price">{commatize(candy.price)}</td>
+          <td className="inventory">{commatize(this.props.game.inventory[candyName] || 0)}</td>
           <td className="input">
             <input
               type="number"
-              value={this.state.localInventory[drugName] || 0}
-              onChange={e => this.setInventory(drugName, parseInt(e.target.value, 10))} />
+              value={this.state.localInventory[candyName] || 0}
+              onChange={e => this.setInventory(candyName, parseInt(e.target.value, 10))} />
           </td>
           <td className="subtotal">
             <span className={subtotalClass}>{commatize(Math.abs(subtotal))}</span>
@@ -90,14 +90,14 @@ class Drugs extends React.Component {
       totalClass = 'sell';
     }
     return (
-      <div className="drugs">
+      <div className="candy">
         <h2>What do you want to buy?</h2>
         <Header />
         <form onSubmit={e => this.handleSubmit(e)}>
           <table>
             <thead>
               <tr>
-                <th className="drug">Drug</th>
+                <th className="candy">Candy</th>
                 <th className="price">Price</th>
                 <th className="inventory">Current inventory</th>
                 <th className="input">Buy/Sell</th>
@@ -105,7 +105,7 @@ class Drugs extends React.Component {
               </tr>
             </thead>
             <tbody>
-              {this.drugList()}
+              {this.candyList()}
               <tr className="total">
                 <td colSpan="4">Total</td>
                 <td>
@@ -121,16 +121,16 @@ class Drugs extends React.Component {
   }
 }
 
-Drugs.displayName = 'Drugs';
-Drugs.propTypes = {
+Candy.displayName = 'Candy';
+Candy.propTypes = {
   actions: PropTypes.shape({
-    buyDrugs: PropTypes.func.isRequired,
+    buyCandy: PropTypes.func.isRequired,
   }),
   game: PropTypes.shape({
     balance: PropTypes.number,
     inventory: PropTypes.object,
     capacity: PropTypes.number,
-    drugs: PropTypes.object,
+    candy: PropTypes.object,
   }),
 };
 
@@ -142,9 +142,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
-      buyDrugs,
+      buyCandy,
     }, dispatch),
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Drugs);
+export default connect(mapStateToProps, mapDispatchToProps)(Candy);

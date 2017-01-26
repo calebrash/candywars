@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 import {
   startGame,
   pickLocation,
-  buyDrugs,
+  buyCandy,
   switchView
 } from '../actions/';
 import Main from '../components/App';
@@ -33,7 +33,7 @@ App.propTypes = {
   actions: PropTypes.shape({
     startGame: PropTypes.func.isRequired,
     pickLocation: PropTypes.func.isRequired,
-    buyDrugs: PropTypes.func.isRequired,
+    buyCandy: PropTypes.func.isRequired,
     switchView: PropTypes.func.isRequired,
   }),
   game: PropTypes.shape({
@@ -43,7 +43,7 @@ App.propTypes = {
     inventory: PropTypes.object,
     capacity: PropTypes.number,
     locations: PropTypes.array,
-    drugs: PropTypes.object,
+    candy: PropTypes.object,
     incident: PropTypes.object,
   }),
 };
@@ -58,7 +58,7 @@ function mapDispatchToProps(dispatch) {
   const actions = {
     startGame,
     pickLocation,
-    buyDrugs,
+    buyCandy,
     switchView
   };
   const actionMap = { actions: bindActionCreators(actions, dispatch) };

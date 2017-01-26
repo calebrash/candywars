@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import Intro from './Intro';
 import Locations from './Locations';
-import Drugs from './Drugs';
+import Candy from './Candy';
 import Summary from './Summary';
 import Incident from './Incident';
 import { VIEWS } from '../reducers/const';
@@ -12,8 +12,8 @@ class AppComponent extends React.Component {
     switch (this.props.game.view) {
       case VIEWS.LOCATIONS:
         return <Locations />;
-      case VIEWS.DRUGS:
-        return <Drugs />;
+      case VIEWS.CANDY:
+        return <Candy />;
       case VIEWS.SUMMARY:
         return <Summary />;
       case VIEWS.INCIDENT:

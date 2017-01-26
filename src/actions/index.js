@@ -6,14 +6,14 @@ import {action1, action2} from '../actions/'
 */
 /* Populated by react-webpack-redux:action */
 import switchView from '../actions/switchView';
-import buyDrugs from '../actions/buyDrugs';
+import buyCandy from '../actions/buyCandy';
 import pickLocation from '../actions/pickLocation';
 import startGame from '../actions/startGame';
 
 const actions = {
   startGame,
   pickLocation,
-  buyDrugs,
+  buyCandy,
   switchView,
 };
 

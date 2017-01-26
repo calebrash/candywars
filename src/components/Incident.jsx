@@ -12,7 +12,7 @@ class Incident extends React.Component {
         <h2>{this.props.game.incident.title}</h2>
         <h3>{this.props.game.incident.subtitle}</h3>
         <Header />
-        <button className="btn" onClick={() => this.props.actions.switchView(VIEWS.DRUGS)}>Continue</button>
+        <button className="btn" onClick={() => this.props.actions.switchView(VIEWS.CANDY)}>Continue</button>
       </div>
     );
   }
