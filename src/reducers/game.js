@@ -80,7 +80,7 @@ function reducer(state = initialState, action) {
         inventory: Object.assign({}, state.inventory, action.inventory),
         balance: state.balance - action.total,
       };
-      if (state.day + 1 === MAX_DAYS) {
+      if (state.day === MAX_DAYS) {
         updates.view = VIEWS.SUMMARY;
       } else {
         updates = Object.assign({}, updates, {
